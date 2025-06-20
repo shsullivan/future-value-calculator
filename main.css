@@ -24,6 +24,21 @@ label {
     width: 15em;
     margin-bottom: .5em;
 }
+.checkbox-row {
+    clear: left;
+    margin-left: 11em;
+    margin-bottom: .5em;
+    display: flex;
+    align-items: center;
+}
+.checkbox-row input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+.checkbox-row label {
+    float: none;
+    width: auto;
+    padding: 0;
+}
 #buttons input {
     float: left;
     margin-bottom: .5em;
