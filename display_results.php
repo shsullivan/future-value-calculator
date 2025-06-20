@@ -6,6 +6,8 @@
             FILTER_VALIDATE_FLOAT);
     $years = filter_input(INPUT_POST, 'years', 
             FILTER_VALIDATE_INT);
+    // Added variable to capture checkbox entry
+    $monthly = isset($_POST['monthly']);
 
     // validate investment
     if ($investment === FALSE ) {
@@ -36,11 +38,21 @@
     }
 
     // calculate the future value
+    // Updated to adjust calculation based on checkbox information
     $future_value = $investment;
-    for ($i = 1; $i <= $years; $i++) {
-        $future_value += $future_value * $interest_rate *.01;
+    // If not checked calculate as normal
+    if (!$monthly) {
+        for ($i = 1; $i <= $years; $i++) {
+            $future_value += $future_value * $interest_rate * .01;
+        }
     }
-
+    // If checked, calculate interest based on the formula below.
+    // This came from the internet. I originally multiplied years by 12 in the for loop
+    // of the formula above and got an outlandish number
+    // Probably shouldn't have second guessed myself
+    else {
+        $future_value = $future_value * (1 + ($interest_rate/12))^(12 * $years);
+    }
     // apply currency and percent formatting
     $investment_f = '$'.number_format($investment, 2);
     $yearly_rate_f = $interest_rate.'%';
@@ -67,6 +79,9 @@
 
         <label>Future Value:</label>
         <span><?php echo $future_value_f; ?></span><br>
+        <?php if ($monthly): ?>
+            <p>NOTE: Future value is based on monthly compounding interest.</p>
+        <?php endif; ?>
     </main>
 </body>
 </html>

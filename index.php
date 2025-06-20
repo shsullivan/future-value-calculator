@@ -38,6 +38,7 @@
             <label>Number of Years:</label>
             <input type="text" name="years"
                        value="<?php echo $years; ?>"/><br>
+            <!-- Added checkbox. Div tag used to make styling easier -->
             <div class="checkbox-row">
                 <input type="checkbox" name="monthly" id="monthly">
                 <label for="monthly" class="inline">Compound Interest Monthly</label><br>
